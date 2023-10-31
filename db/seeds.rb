@@ -7,6 +7,8 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-UserType.create(name: 'Writer')
-UserType.create(name: 'Administrator')
-PostType.create(name: 'Tech')
+UserType.where(name: 'Writer').last.destroy
+UserType.where(name: 'Administrator').last.destroy
+PostType.where(name: 'Tech').last.destroy
+
+User.find_by(email: 'ian.green@ics-digital.com').update_column(:user_type_id, UserType.find_by(name: 'Administrator').id)

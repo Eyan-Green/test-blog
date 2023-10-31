@@ -7,6 +7,6 @@ FactoryBot.define do
     user_id { User.last.id }
   end
   trait :post_type do
-    post_type_id { create(:post_type, :tech).id }
+    post_type_id { (PostType.find_by(name: 'Tech') || create(:post_type, :tech)).id }
   end
 end

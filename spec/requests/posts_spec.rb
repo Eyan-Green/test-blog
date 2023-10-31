@@ -7,7 +7,6 @@ RSpec.describe 'Posts', type: :request do
 
   let(:instance) { create(:post, :post_type) }
   let(:user_instance) { create(:user, :admin) }
-  let(:post_type_instance) { create(:post_type, :tech) }
 
   before(:each) do
     create(:user_type, :writer)
@@ -40,7 +39,7 @@ RSpec.describe 'Posts', type: :request do
       get '/posts/new'
       expect(response).to have_http_status(:success)
 
-      post '/posts', params: { post: { title: 'Title', content: 'Content', post_type_id: post_type_instance.id } }
+      post '/posts', params: { post: { title: 'Title', content: 'Content', post_type_id: instance.post_type.id } }
       follow_redirect!
       expect(response.body).to include('Title')
       expect(response.body).to include('Content')
@@ -52,7 +51,7 @@ RSpec.describe 'Posts', type: :request do
 
       post '/posts', params: { post: { title: nil, content: 'Content' } }
       expect(response.body).to include('New post')
-      expect(response.body).to include('User the form below to create a new post.')
+      expect(response.body).to include('Use the form below to create a new post.')
     end
   end
 
@@ -73,7 +72,7 @@ RSpec.describe 'Posts', type: :request do
 
       patch "/posts/#{Post.last.id}", params: { post: { title: nil, content: 'Updated content' } }
       expect(response.body).to include('Edit post')
-      expect(response.body).to include('User the form below to edit this post.')
+      expect(response.body).to include('Use the form below to edit this post.')
     end
   end
 
