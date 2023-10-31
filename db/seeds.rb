@@ -7,7 +7,7 @@ UserType.find_or_create_by!(name: 'Administrator')
 PostType.find_or_create_by!(name: 'Tech')
 
 User.all.each do |user|
-  if user.name == 'Ian Green'
+  if user.full_name == 'Ian Green'
     user.update_column(:user_type_id, UserType.find_by(name: 'Administrator').id)
   else
     user.update_column(:user_type_id, UserType.find_by(name: 'Writer').id)
