@@ -63,6 +63,13 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe 'Class methods' do
+    it 'returns user' do
+      user = create(:user, :writer, uid: '0123456789', provider: 'google')
+      expect(User.from_omniauth(user)).to eq(user)
+    end
+  end
+
   describe 'Callbacks' do
     it 'adds writer user type by default' do
       writer_user_type
