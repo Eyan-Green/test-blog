@@ -49,6 +49,18 @@ RSpec.describe User, type: :model do
       message = 'Password is too short (minimum is 10 characters)'
       expect(user.errors.full_messages).to include(message)
     end
+
+    it 'validates uniqueness of user email' do
+      user = create(:user, :writer)
+      user2 = User.new(full_name: name,
+                       email: user.email,
+                       password: pw,
+                       password_confirmation: pw,
+                       user_type_id: user.user_type_id)
+      user2.valid?
+      message = 'Email has already been taken'
+      expect(user2.errors.full_messages).to include(message)
+    end
   end
 
   describe 'Callbacks' do
