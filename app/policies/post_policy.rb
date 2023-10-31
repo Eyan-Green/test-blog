@@ -14,11 +14,11 @@ class PostPolicy < ApplicationPolicy
 
   def update?
     user_is_admin? ||
-      @record.user_id == @user
+      @record.user == @user
   end
 
   def destroy?
     user_is_admin? ||
-      @record.user_id == @user
+      @record.user == @user
   end
 end
