@@ -1,0 +1,5 @@
+<nav class="h-16 bg-blue-100 flex items-center space-x-5 px-5">
+  <div class="hover:text-red-500"><%= link_to 'Posts', posts_path if user_signed_in? %></div>
+  <div class="hover:text-red-500"><%= link_to 'New Post', new_post_path if user_signed_in? %></div>
+  <div class="hover:text-red-500"><%= button_to('Sign Out', destroy_user_session_path, method: :delete) if user_signed_in? %></div>
+</nav>

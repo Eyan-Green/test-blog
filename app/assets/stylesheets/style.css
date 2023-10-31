@@ -1,0 +1,10 @@
+.field {
+    display: flex;
+    flex-direction: column;
+}
+
+trix-editor {
+    &.customized-min-height {
+      min-height: 15em;
+    }
+}

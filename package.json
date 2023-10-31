@@ -1,0 +1,12 @@
+{
+  "name": "template",
+  "version": "1.0.0",
+  "description": "Test app for training",
+  "main": "index.js",
+  "author": "Ian Green <ian.green@ics-digital.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@rails/actiontext": "^7.1.1",
+    "trix": "^2.0.7"
+  }
+}
