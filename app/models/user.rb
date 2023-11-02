@@ -8,6 +8,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
 
+  has_many :comments
   has_many :posts
   belongs_to :user_type, foreign_key: :user_type_id, required: false
 

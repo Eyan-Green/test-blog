@@ -9,7 +9,7 @@ gem 'rails', '~> 7.1.1'
 gem 'sprockets-rails'
 
 # Use pg as the database for Active Record
-gem "pg", "~> 1.1"
+gem 'pg', '~> 1.1'
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem 'puma', '>= 5.0'
@@ -21,6 +21,7 @@ gem 'importmap-rails'
 gem 'turbo-rails'
 
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
+gem 'hotwire-rails'
 gem 'stimulus-rails'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
@@ -76,6 +77,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 6.0.0'
 end
 
-gem "pundit", "~> 2.3"
+gem 'pundit', '~> 2.3'
 
-gem "tailwindcss-rails", "~> 2.0"
+gem 'tailwindcss-rails', '~> 2.0'

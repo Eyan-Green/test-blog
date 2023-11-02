@@ -30,18 +30,6 @@ footer {
   min-height: calc(100vh - 40px);
 }
 
-/* typography */
-
-h2 {
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-.call-to-action:hover {
-  text-decoration: underline;
-}
-
-
 /* SSO Google & login button */
 
 .gsi-material-button {

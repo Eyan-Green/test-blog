@@ -4,11 +4,18 @@
   </div>
 <% end %>
 <div class="m-5 show-view space-y-5">
-  <h1 class="text-center text-5xl font-bold"><%= @post.title %></h1>
+  <h1 class="mb-5"><%= @post.title %></h1>
   <small>Written by <%= @post.user.full_name %> on <%= @post.created_at %></small>
   <p><%= @post.content %></p>
   <ul class="flex flex-row justify-center list-none space-x-5">
-    <li><%= link_to 'Edit Post', edit_post_path(@post), class: 'call-to-action' %></li>
-    <li><%= link_to 'All Posts', posts_path, class: 'call-to-action' %></li>
+    <li><%= link_to 'Edit Post', edit_post_path(@post), class: 'hover:underline' %></li>
+    <li><%= link_to 'All Posts', posts_path, class: 'hover:underline' %></li>
   </ul>
+  <%= render partial: 'comments/form', locals: { comment: Comment.new, commentable: @post } %>
+
+  <%= turbo_stream_from @post, :comments %>
+
+  <%= tag.div id: "#{dom_id(@post)}_comments" do %>
+    <%= render partial: 'comments/comment_with_replies', collection: @post.comments, as: :comment %>
+  <% end %>
 </div>

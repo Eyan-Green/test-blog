@@ -14,6 +14,10 @@ RSpec.describe Post, type: :model do
       t = Post.reflect_on_association(:post_type)
       expect(t.macro).to eq(:belongs_to)
     end
+    it 'should have many comments' do
+      t = Post.reflect_on_association(:comments)
+      expect(t.macro).to eq(:has_many)
+    end
   end
 
   describe 'Validations' do
