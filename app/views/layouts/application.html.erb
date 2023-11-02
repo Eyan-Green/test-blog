@@ -11,9 +11,9 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body class="h-full flex flex-col justify-between">
+  <body>
       <%= render 'layouts/navbar' %>
-      <main class="prose mx-auto">
+      <main class="flex flex-col justify-center items-center main">
         <%= yield %>
       </main>
       <%= render 'layouts/footer' %>

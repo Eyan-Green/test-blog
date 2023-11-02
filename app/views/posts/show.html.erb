@@ -3,12 +3,12 @@
     <%= msg %>
   </div>
 <% end %>
-<div class="px-5">
-  <h2 class="m-5 text-center"><%= @post.title %></h2>
+<div class="m-5 show-view space-y-5">
+  <h1 class="text-center text-5xl font-bold"><%= @post.title %></h1>
   <small>Written by <%= @post.user.full_name %> on <%= @post.created_at %></small>
   <p><%= @post.content %></p>
-  <ul class="flex flex-row justify-center list-none">
-    <li><%= link_to 'Edit Post', edit_post_path(@post) %></li>
-    <li><%= link_to 'All Posts', posts_path %></li>
+  <ul class="flex flex-row justify-center list-none space-x-5">
+    <li><%= link_to 'Edit Post', edit_post_path(@post), class: 'call-to-action' %></li>
+    <li><%= link_to 'All Posts', posts_path, class: 'call-to-action' %></li>
   </ul>
 </div>

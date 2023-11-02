@@ -1,13 +1,48 @@
-.field {
-    display: flex;
-    flex-direction: column;
-}
+/* action text editor */
 
 trix-editor {
-    &.customized-min-height {
-      min-height: 15em;
+    &.customized-max-width {
+      max-width: 50em;
+      min-height: 30em;
     }
 }
+
+/* layout heights, widths and positions */
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+.show-view, .index-post {
+  max-width: 50em;
+}
+
+.index-post {
+  min-height: 20em;
+}
+
+footer {
+  min-height: 10em;
+}
+
+.main {
+  min-height: calc(100vh - 40px);
+}
+
+/* typography */
+
+h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.call-to-action:hover {
+  text-decoration: underline;
+}
+
+
+/* SSO Google & login button */
 
 .gsi-material-button {
     -moz-user-select: none;
@@ -36,7 +71,7 @@ trix-editor {
     transition: background-color .218s, border-color .218s, box-shadow .218s;
     vertical-align: middle;
     white-space: nowrap;
-    width: auto;
+    width: 300px;
     max-width: 400px;
     min-width: min-content;
   }
@@ -103,13 +138,8 @@ trix-editor {
     opacity: 12%;
   }
   
-  .gsi-material-button:not(:disabled):hover {
-    -webkit-box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30), 0 1px 3px 1px rgba(60, 64, 67, .15);
-    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30), 0 1px 3px 1px rgba(60, 64, 67, .15);
-  }
-  
-  .gsi-material-button:not(:disabled):hover .gsi-material-button-state {
-    background-color: #303030;
-    opacity: 8%;
+  .login-button {
+    border: 1px solid #747775;
+    height: 40px;
   }
   

@@ -18,6 +18,7 @@ class User < ApplicationRecord
   before_create :set_user_type
 
   def self.from_omniauth(auth)
+    puts "AUTH==============#{auth}"
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0, 20]
