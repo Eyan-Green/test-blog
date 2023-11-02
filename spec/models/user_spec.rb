@@ -8,6 +8,16 @@ RSpec.describe User, type: :model do
   let(:pw) { Devise.friendly_token[0, 20] }
   let(:name) { "#{Faker::Name.first_name} #{Faker::Name.last_name}" }
   let(:email_address) { Faker::Internet.email }
+  let(:auth_hash) do
+    OmniAuth::AuthHash.new(
+      provider: 'google',
+      uid: '123456789',
+      info: {
+        email: 'test@example.com',
+        name: 'Test User'
+      }
+    )
+  end
 
   describe 'Associations' do
     it 'should have many posts' do
@@ -64,9 +74,34 @@ RSpec.describe User, type: :model do
   end
 
   describe 'Class methods' do
-    it 'returns user' do
-      user = create(:user, :writer, uid: '0123456789', provider: 'google')
-      expect(User.from_omniauth(user)).to eq(user)
+    context 'when a user with the provided provider and uid does not exist' do
+      it 'creates a new user with the information from the auth hash' do
+        create(:user_type, :writer)
+        expect {
+          user = User.from_omniauth(auth_hash)
+          expect(user.provider).to eq('google')
+          expect(user.uid).to eq('123456789')
+          expect(user.email).to eq('test@example.com')
+          expect(user.full_name).to eq('Test User')
+        }.to change(User, :count).by(1)
+      end
+    end
+
+    context 'when a user with the provided provider and uid already exists' do
+      before do
+        create(:user_type, :writer)
+        User.from_omniauth(auth_hash)
+      end
+
+      it 'finds and returns the existing user' do
+        expect {
+          user = User.from_omniauth(auth_hash)
+          expect(user.provider).to eq('google')
+          expect(user.uid).to eq('123456789')
+          expect(user.email).to eq('test@example.com')
+          expect(user.full_name).to eq('Test User')
+        }.not_to change(User, :count)
+      end
     end
   end
 

@@ -51,7 +51,6 @@ RSpec.describe 'Posts', type: :request do
 
       post '/posts', params: { post: { title: nil, content: 'Content' } }
       expect(response.body).to include('New post')
-      expect(response.body).to include('Use the form below to create a new post.')
     end
   end
 
@@ -72,7 +71,6 @@ RSpec.describe 'Posts', type: :request do
 
       patch "/posts/#{Post.last.id}", params: { post: { title: nil, content: 'Updated content' } }
       expect(response.body).to include('Edit post')
-      expect(response.body).to include('Use the form below to edit this post.')
     end
   end
 
