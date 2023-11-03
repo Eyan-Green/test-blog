@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Application controller
+# Comment concern controller
 module Commentable
   extend ActiveSupport::Concern
   include ActionView::RecordIdentifier
@@ -14,17 +14,29 @@ module Commentable
     respond_to do |format|
       if @comment.save
         comment = Comment.new
-        format.turbo_stream {
+        format.turbo_stream do
           if @parent
-            render turbo_stream: turbo_stream.replace(dom_id_for_records(@parent, comment), partial: 'comments/form', locals: { comment: @comment, commentable: @parent, data: { comment_reply_target: :form }, class: 'hidden' })
+            render turbo_stream: turbo_stream.replace(dom_id_for_records(@parent, comment),
+                                                      partial: 'comments/form',
+                                                      locals: { comment: @comment,
+                                                                commentable: @parent,
+                                                                data: {
+                                                                  comment_reply_target: :form
+                                                                }, class: 'hidden' })
           else
-            render turbo_stream: turbo_stream.replace(dom_id_for_records(@commentable, comment), partial: 'comments/form', locals: { comment: @comment, commentable: @commentable })
+            render turbo_stream: turbo_stream.replace(dom_id_for_records(@commentable, comment),
+                                                      partial: 'comments/form',
+                                                      locals: { comment: @comment,
+                                                                commentable: @commentable })
           end
-        }
+        end
       else
-        format.turbo_stream {
-          render turbo_stream: turbo_stream.replace(dom_id_for_records(@parent || @commentable, @comment), partial: 'comments/form', locals: { comment: @comment, commentable: @parent || @commentable })
-        }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace(dom_id_for_records(@parent || @commentable, @comment),
+                                                    partial: 'comments/form',
+                                                    locals: { comment: @comment,
+                                                              commentable: @parent || @commentable })
+        end
         format.html { redirect_to @commentable }
       end
     end

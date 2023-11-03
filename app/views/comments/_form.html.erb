@@ -12,6 +12,8 @@
     </div>
   <% end %>
   <%= form.rich_text_area :body, id: "#{dom_id_for_records(*model)}_body" %>
-  <%= form.submit 'Submit' %>
-  <%= link_to 'Cancel', comment, class: '' if form.object.persisted? %>
+  <div class="flex items-center justify-between mt-5">
+    <%= form.submit 'Submit', class: 'hover:cursor-pointer actions rounded-md hover:bg-blue-300 login-button px-5' %>
+    <%= link_to 'Cancel', comment, class: 'flex items-center hover:cursor-pointer actions rounded-md hover:bg-red-300 login-button px-5' if form.object.persisted? %>
+  </div>
 <% end %>

@@ -1,11 +1,11 @@
 <%= turbo_stream_from comment %>
 <%= turbo_frame_tag comment do %>
-  <div>
+  <div class="flex justify-between mt-5">
     <div><%= comment.user.full_name %></div>
+    <div><%= comment.body %></div>
     <div>
-      <%= link_to 'Edit', edit_comment_path(comment), class: 'mr-2' %>
-      <%= link_to 'Delete', comment_path(comment), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'} %>
+      <%= link_to 'Edit', edit_comment_path(comment), class: 'mr-2 hover:cursor-pointer actions rounded-md hover:bg-blue-300 login-button px-2' %>
+      <%= link_to 'Delete', comment_path(comment), data: {turbo_method: :delete, turbo_confirm: 'Are you sure?'}, class: 'hover:cursor-pointer actions rounded-md hover:bg-red-300 login-button px-2' %>
     </div>
   </div>
-  <%= comment.body %>
 <% end %>

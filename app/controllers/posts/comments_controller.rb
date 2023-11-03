@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Application controller
+# Comments nested in posts controller
 class Posts::CommentsController < ApplicationController
   include Commentable
 

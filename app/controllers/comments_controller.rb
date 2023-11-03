@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Comments controller, create action is in concerns
 class CommentsController < ApplicationController
   before_action :set_comment
 
