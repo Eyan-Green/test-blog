@@ -13,20 +13,20 @@ module Commentable
 
     respond_to do |format|
       if @comment.save
-        comment = Comment.new
+        new_comment = Comment.new
         format.turbo_stream do
           if @parent
-            render turbo_stream: turbo_stream.replace(dom_id_for_records(@parent, comment),
+            render turbo_stream: turbo_stream.replace(dom_id_for_records(@parent, new_comment),
                                                       partial: 'comments/form',
-                                                      locals: { comment: @comment,
+                                                      locals: { comment: new_comment,
                                                                 commentable: @parent,
                                                                 data: {
                                                                   comment_reply_target: :form
                                                                 }, class: 'hidden' })
           else
-            render turbo_stream: turbo_stream.replace(dom_id_for_records(@commentable, comment),
+            render turbo_stream: turbo_stream.replace(dom_id_for_records(@commentable, new_comment),
                                                       partial: 'comments/form',
-                                                      locals: { comment: @comment,
+                                                      locals: { comment: new_comment,
                                                                 commentable: @commentable })
           end
         end
