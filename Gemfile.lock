@@ -125,6 +125,7 @@ GEM
     globalid (1.2.1)
       activesupport (>= 6.1)
     hashie (5.0.0)
+    hiredis (0.6.3)
     hotwire-rails (0.1.3)
       rails (>= 6.0.0)
       stimulus-rails
@@ -333,6 +334,7 @@ DEPENDENCIES
   devise
   factory_bot_rails
   faker
+  hiredis
   hotwire-rails
   image_processing (~> 1.2)
   importmap-rails
