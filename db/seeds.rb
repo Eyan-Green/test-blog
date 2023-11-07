@@ -5,3 +5,10 @@
 UserType.find_or_create_by!(name: 'Writer')
 UserType.find_or_create_by!(name: 'Administrator')
 PostType.find_or_create_by!(name: 'Tech')
+
+100.times do |i|
+  post = Post.where(title: "Blog post title #{i}").first_or_initialize
+  post.update(user_id: User.pluck(:id).sample,
+              post_type_id: PostType.last.id,
+              content: "I'm baby yes plz vinyl health goth asymmetrical. Tofu poke tousled put a bird on it shabby chic pug PBR&B williamsburg poutine try-hard. Lyft JOMO cred chartreuse readymade occupy activated charcoal. Twee meditation mumblecore helvetica fixie lumbersexual neutra hella, brunch pinterest XOXO keytar forage aesthetic.")
+end

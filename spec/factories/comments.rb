@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :comment do
-    user { nil }
-    commentable { nil }
-    parent_id { 1 }
-    body { nil }
+    user { (User.last || create(:user, :writer)) }
+    commentable { (Post.last || create(:post, :post_type)) }
+    parent_id { (Post.last || create(:post, :post_type)).id }
+    body { 'This is a comment' }
   end
 end

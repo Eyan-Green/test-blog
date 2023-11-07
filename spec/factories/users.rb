@@ -9,10 +9,10 @@ FactoryBot.define do
     password { pw }
     password_confirmation { pw }
     trait :admin do
-      user_type_id { create(:user_type, :admin).id }
+      user_type_id { (UserType.find_by(name: 'Administrator') || create(:user_type, :admin)).id }
     end
     trait :writer do
-      user_type_id { create(:user_type, :writer).id }
+      user_type_id { (UserType.find_by(name: 'Writer') || create(:user_type, :writer)).id }
     end
   end
 end

@@ -28,6 +28,10 @@ RSpec.describe User, type: :model do
       t = User.reflect_on_association(:comments)
       expect(t.macro).to eq(:has_many)
     end
+    it 'should have many comments' do
+      t = User.reflect_on_association(:likes)
+      expect(t.macro).to eq(:has_many)
+    end
     it 'should belong to user type' do
       t = User.reflect_on_association(:user_type)
       expect(t.macro).to eq(:belongs_to)

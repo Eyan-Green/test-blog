@@ -42,4 +42,10 @@ feature 'User visits post path' do
     expect(page).to have_content('Post was successfully updated.')
     expect(current_path).to eq(post_path(instance))
   end
+
+  scenario 'click on like and text changes to Unlike' do
+    visit post_path(instance)
+    click_button 'Like'
+    expect(page).to have_content('Unlike')
+  end
 end

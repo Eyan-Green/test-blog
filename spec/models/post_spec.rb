@@ -41,4 +41,27 @@ RSpec.describe Post, type: :model do
       expect(post.errors.full_messages).to include('User must exist')
     end
   end
+
+  describe 'Utility methods' do
+    let(:instance) { create(:post, :post_type) }
+    let(:like_instance) { create(:like) }
+
+    it 'returns true when user has a like on post instance' do
+      expect(like_instance.record.liked_by?(like_instance.user)).to be true
+    end
+    it 'returns false when user has no likes on post instance' do
+      writer = create(:user, :writer)
+      expect(like_instance.record.liked_by?(writer)).to be false
+    end
+    it 'returns the user like' do
+      expect(like_instance.record.like(like_instance.user)).to eq(like_instance)
+    end
+    it 'creates a new like' do
+      expect { instance.like(instance.user) }.to change(Like, :count).by(1)
+    end
+    it 'destroys all likes by user on a post instance' do
+      like_instance
+      expect { like_instance.record.unlike(like_instance.user) }.to change(Like, :count).by(-1)
+    end
+  end
 end

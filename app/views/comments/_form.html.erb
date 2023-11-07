@@ -1,5 +1,4 @@
 <% model = [local_assigns[:commentable], comment].compact %>
-
 <%= form_with model: model,
   id: dom_id_for_records(*model),
   data: local_assigns[:data],

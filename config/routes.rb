@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'up' => 'rails/health#show', as: :rails_health_check
   resources :posts do
     resources :comments, module: :posts
+    resource :like, module: :posts
   end
 
   resources :comments do

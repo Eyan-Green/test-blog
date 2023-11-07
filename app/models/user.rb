@@ -9,12 +9,13 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: [:google_oauth2]
 
   has_many :comments
+  has_many :likes
   has_many :posts
   belongs_to :user_type, foreign_key: :user_type_id, required: false
 
-  validates_presence_of :full_name
-  validates_presence_of :email
-  validates_uniqueness_of :email
+  validates :full_name, presence: true
+  validates :email, presence: true
+  validates :email, uniqueness: true
 
   before_create :set_user_type
 

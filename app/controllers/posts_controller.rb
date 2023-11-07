@@ -6,6 +6,7 @@ class PostsController < ApplicationController
 
   def index
     @posts = Post.all
+    @pagy, @posts = pagy(@posts)
   end
 
   def show; end
