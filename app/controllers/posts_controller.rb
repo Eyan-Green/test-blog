@@ -25,7 +25,8 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to @post, notice: 'Post was successfully created.'
     else
-      render :new
+      flash.now[:alert] = 'Post could not be created, please try again.'
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -33,7 +34,8 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       redirect_to @post, notice: 'Post was successfully updated.'
     else
-      render :edit
+      flash.now[:alert] = 'Post could not be updated, please try again.'
+      render :edit, status: :unprocessable_entity
     end
   end
 
