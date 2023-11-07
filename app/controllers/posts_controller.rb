@@ -7,6 +7,8 @@ class PostsController < ApplicationController
   def index
     @posts = Post.all
     @pagy, @posts = pagy(@posts)
+  rescue Pagy::OverflowError
+    redirect_to posts_path(page: 1)
   end
 
   def show; end
