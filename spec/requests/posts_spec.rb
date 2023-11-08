@@ -50,6 +50,8 @@ RSpec.describe 'Posts', type: :request do
       expect(response).to have_http_status(:success)
 
       post '/posts', params: { post: { title: nil, content: 'Content' } }
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response.body).to include('Post could not be created, please try again.')
       expect(response.body).to include('New post')
     end
   end
@@ -70,6 +72,8 @@ RSpec.describe 'Posts', type: :request do
       expect(response).to have_http_status(:success)
 
       patch "/posts/#{Post.last.id}", params: { post: { title: nil, content: 'Updated content' } }
+      expect(response).to have_http_status(:unprocessable_entity)
+      expect(response.body).to include('Post could not be updated, please try again.')
       expect(response.body).to include('Edit post')
     end
   end

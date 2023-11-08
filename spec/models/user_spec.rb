@@ -85,13 +85,13 @@ RSpec.describe User, type: :model do
     context 'when a user with the provided provider and uid does not exist' do
       it 'creates a new user with the information from the auth hash' do
         create(:user_type, :writer)
-        expect {
+        expect do
           user = User.from_omniauth(auth_hash)
           expect(user.provider).to eq('google')
           expect(user.uid).to eq('123456789')
           expect(user.email).to eq('test@example.com')
           expect(user.full_name).to eq('Test User')
-        }.to change(User, :count).by(1)
+        end.to change(User, :count).by(1)
       end
     end
 
@@ -102,13 +102,13 @@ RSpec.describe User, type: :model do
       end
 
       it 'finds and returns the existing user' do
-        expect {
+        expect do
           user = User.from_omniauth(auth_hash)
           expect(user.provider).to eq('google')
           expect(user.uid).to eq('123456789')
           expect(user.email).to eq('test@example.com')
           expect(user.full_name).to eq('Test User')
-        }.not_to change(User, :count)
+        end.not_to change(User, :count)
       end
     end
   end
