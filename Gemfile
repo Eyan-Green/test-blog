@@ -83,3 +83,5 @@ gem 'pundit', '~> 2.3'
 gem 'tailwindcss-rails', '~> 2.0'
 
 gem 'pagy', '~> 6.1'
+
+gem "sidekiq", "~> 7.2"

@@ -12,19 +12,26 @@ RSpec.describe 'Comments', type: :request do
   end
 
   describe 'POST /post/:commentable_id/comments' do
+    let(:valid_params) { { comment: { body: 'Test Comment' }, commentable_id: commentable.id } }
+    let(:header_params) { { 'Accept' => 'text/vnd.turbo-stream.html' } }
+
     context 'with valid attributes' do
       it 'creates a new comment and renders the turbo_stream' do
-        valid_params = { comment: { body: 'Test Comment' }, commentable_id: commentable.id }
-        post "/posts/#{commentable.id}/comments", params: valid_params, headers: { 'Accept' => 'text/vnd.turbo-stream.html' }
+        post "/posts/#{commentable.id}/comments", params: valid_params, headers: header_params
 
         expect(response).to be_successful
+      end
+      it 'sends an email notification' do
+        expect do
+          post "/posts/#{commentable.id}/comments", params: valid_params, headers: header_params
+        end.to(have_enqueued_job.on_queue('default').with('CommentMailer', 'new_comment', 'deliver_now', { params: { user: commentable.user, post: commentable}, args: []}))
       end
     end
 
     context 'with invalid attributes' do
       it 'does not create a new comment and renders the turbo_stream with errors' do
         invalid_params = { comment: { body: '' }, commentable_id: commentable.id }
-        post "/posts/#{commentable.id}/comments", params: invalid_params, headers: { 'Accept' => 'text/vnd.turbo-stream.html' }
+        post "/posts/#{commentable.id}/comments", params: invalid_params, headers: header_params
 
         expect(response).to be_successful
         expect(response.body).to include("</form></template></turbo-stream>")

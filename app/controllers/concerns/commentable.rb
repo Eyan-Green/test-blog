@@ -14,6 +14,7 @@ module Commentable
     respond_to do |format|
       if @comment.save
         new_comment = Comment.new
+        CommentMailer.with(user: @commentable.user, post: @commentable).new_comment.deliver_later
         format.turbo_stream do
           if @parent
             render turbo_stream: turbo_stream.replace(dom_id_for_records(@parent, new_comment),

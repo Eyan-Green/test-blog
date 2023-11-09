@@ -1,0 +1,14 @@
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hello, <%= @user.full_name %></h1>
+    <p>
+      There is a new comment on a the post <em><%= @post.title %></em> you wrote.<br>
+    </p>
+    <p>
+      To view the comment, just follow this <%= link_to 'link', post_url(@post) %>.
+    </p>
+  </body>
+</html>
