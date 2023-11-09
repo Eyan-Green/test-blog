@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe Posts::LikesController, type: :request do
-  include Warden::Test::Helpers
   let(:user) { create(:user, :writer) }
   let(:post) { create(:post, :post_type) }
 

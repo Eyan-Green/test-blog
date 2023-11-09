@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Comment system spec', type: :system do
-  include Warden::Test::Helpers
   let(:user_instance) { create(:user, :admin) }
   let(:post_instance) { create(:post, :post_type) }
 

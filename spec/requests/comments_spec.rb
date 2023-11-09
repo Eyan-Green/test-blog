@@ -3,8 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Comments', type: :request do
-  include Warden::Test::Helpers
-
   let(:instance) { create(:comment) }
   let(:user_instance) { create(:user, :admin) }
 

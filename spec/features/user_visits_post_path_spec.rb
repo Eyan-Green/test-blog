@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 feature 'User visits post path' do
-  include Warden::Test::Helpers
   let(:instance) { create(:post, :post_type) }
   let(:user_instance) { create(:user, :admin) }
 

@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe 'Comments', type: :request do
-  include Warden::Test::Helpers
   let(:user) { create(:user, :writer) }
   let(:commentable) { create(:post, :post_type) }
   let(:comment_commentable) { create(:comment) }
