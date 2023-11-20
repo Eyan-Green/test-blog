@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Record controller
+# Record helper
 module RecordHelper
   def dom_id_for_records(*records, prefix: nil)
     records.map do |record|

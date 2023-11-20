@@ -10,7 +10,10 @@ class CommentsController < ApplicationController
 
   def update
     if @comment.update(comment_params)
-      redirect_to @comment
+      respond_to do |format|
+        format.turbo_stream { flash.now[:notice] = 'Comment was successfully updated.' }
+        format.html { redirect_to @comment }
+      end
     else
       render :edit, status: :unprocessable_entity
     end
@@ -19,7 +22,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     respond_to do |format|
-      format.turbo_stream {}
+      format.turbo_stream { flash.now[:notice] = 'Comment was successfully deleted.' }
       format.html { redirect_to @comment.commentable }
     end
   end

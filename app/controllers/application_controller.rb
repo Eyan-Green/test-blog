@@ -13,6 +13,10 @@ class ApplicationController < ActionController::Base
     redirect_to root_url, alert: 'You do not have permission to carry out this action.'
   end
 
+  rescue_from ActiveRecord::RecordNotFound do
+    redirect_to root_url, alert: 'Record not found!'
+  end
+
   protected
 
   def configure_permitted_parameters

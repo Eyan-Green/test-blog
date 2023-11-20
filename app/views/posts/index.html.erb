@@ -1,5 +1,11 @@
 <div class="h-full">
   <h1 class="p-5">All posts</h1>
+  <div class="flex justify-center">
+    <%= form_with url: posts_path, method: :get do |form| %>
+      <%= form.search_field :query %>
+      <%= form.button 'Search', class: 'rounded-md hover:bg-blue-300 login-button px-5' %>
+    <% end %>
+  </div>  
   <% @posts.each do |post| %>
     <div class="border-2 border-black rounded-md p-5 space-y-5 mx-5 my-5 index-post">
       <h2 class="m-0"><%= post.title %></h2>

@@ -5,8 +5,8 @@ class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 
   def index
-    @posts = Post.all
-    @pagy, @posts = pagy(@posts)
+    posts = Post.pagy_search(params[:query])
+    @pagy, @posts = pagy_meilisearch(posts, limit: 25)
   rescue Pagy::OverflowError
     redirect_to posts_path(page: 1)
   end

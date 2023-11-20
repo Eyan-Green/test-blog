@@ -63,4 +63,21 @@ RSpec.describe 'Comment system spec', type: :system do
     click_button 'Submit'
     expect(page).to have_content("Body can't be blank")
   end
+
+  it 'deletes comment' do
+    visit post_path(post_instance)
+
+    expect(page).to have_selector('.comments-text-editor')
+    page.execute_script("document.querySelector('.comments-text-editor').innerHTML = 'Hello <em>world!</em>';")
+
+    click_button 'Submit'
+    expect(page).to have_button('Delete')
+    expect(post_instance.comments.count).to eq(1)
+
+    click_button 'Delete'
+    accept_alert 'Are you sure?'
+    expect(page).to_not have_button('Delete')
+    expect(post_instance.comments.count).to eq(0)
+    expect(page).to have_content('Comment was successfully deleted.')
+  end
 end

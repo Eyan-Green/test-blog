@@ -2,6 +2,8 @@
 
 # Post model
 class Post < ApplicationRecord
+  include MeiliSearch::Rails
+  extend Pagy::Meilisearch
   has_many :comments, as: :commentable
   has_many :likes, as: :record
   belongs_to :post_type
@@ -12,6 +14,24 @@ class Post < ApplicationRecord
   has_rich_text :content
 
   default_scope { order(created_at: :desc) }
+
+  meilisearch do
+    attribute :title
+    attribute :content do
+      content.body.to_plain_text
+    end
+    attribute :user do
+      user.full_name
+    end
+    attribute :comments do
+      comments.map { |comment| comment.body.body.to_plain_text }
+    end
+    attribute :post_type do
+      post_type.name
+    end
+    filterable_attributes %i[title content]
+    sortable_attributes %i[created_at updated_at]
+  end
 
   def liked_by?(user)
     likes.where(user: user).any?

@@ -1,0 +1,35 @@
+<div class="space-y-5"> 
+    <h1 class="mt-5">All users</h1>
+    <p class="text-center">Use the search box to find a user.</p>
+    <div class="flex justify-center">
+      <%= form_with url: users_path, method: :get do |form| %>
+        <%= form.search_field :query %>
+        <%= form.button 'Search', class: 'rounded-md hover:bg-blue-300 login-button px-5' %>
+      <% end %>
+    </div>
+    <table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 bg-gray-700 dark:text-gray-400">
+          <tr class="text-white">
+          <th scope="col" class="px-6 py-3">Name</th>
+          <th scope="col" class="px-6 py-3">Email</th>
+          <th scope="col" class="px-6 py-3">Created at</th>
+          <th scope="col" class="px-6 py-3">Actions</th>
+          </tr>
+      </thead>
+      <tbody>
+          <% @users.each do |user| %>
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+              <td class="px-6 py-4"><%= user.full_name %></td>
+              <td class="px-6 py-4"><%= user.email %></td>
+              <td class="px-6 py-4"><%= user.created_at %></td>
+              <td class="px-6 py-4"><%= button_to lock_display(user), toggle_lock_user_path(user, page: @pagy.page), method: :patch, form: {data: {turbo_confirm: 'Are you sure?'}}, class: 'hover:cursor-pointer actions rounded-md hover:bg-red-300 login-button px-2 min-w-[75px]' if policy(user).toggle_lock? %></td>
+          </tr>
+          <% end %>
+      </tbody>
+    </table>
+</div>
+<% if @pagy.count > @pagy.items %>
+  <div class="my-10">
+    <%== pagy_nav(@pagy) %>
+  </div>
+<% end %>

@@ -1,0 +1,8 @@
+<div class="flex flex-col items-center space-y-5 my-5">
+  <h2>Notification Center</h2>
+  <% current_user.notifications.each do |notification| %>
+  <ul>
+    <li><%= "#{notification.type_of_notification} submitted by #{notification.actor.full_name}" %></li>
+  </ul>
+  <% end %>
+</div>

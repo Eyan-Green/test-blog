@@ -23,6 +23,7 @@ gem 'turbo-rails'
 # Hotwire's modest JavaScript framework [https://stimulus.hotwired.dev]
 gem 'hotwire-rails'
 gem 'stimulus-rails'
+gem 'stimulus_reflex', '3.5.0.rc3'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
@@ -74,7 +75,7 @@ group :test do
 end
 
 group :development, :test do
-  gem 'factory_bot_rails'
+  gem 'factory_bot_rails', '6.2'
   gem 'rspec-rails', '~> 6.0.0'
 end
 
@@ -84,4 +85,6 @@ gem 'tailwindcss-rails', '~> 2.0'
 
 gem 'pagy', '~> 6.1'
 
-gem "sidekiq", "~> 7.2"
+gem 'sidekiq', '~> 7.2'
+
+gem 'meilisearch-rails', '~> 0.10.1'

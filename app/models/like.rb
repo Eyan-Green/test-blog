@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# app/models/like.rb
 class Like < ApplicationRecord
   include ActionView::RecordIdentifier
   belongs_to :record, polymorphic: true, counter_cache: true

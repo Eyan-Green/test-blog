@@ -14,6 +14,7 @@ module Commentable
     respond_to do |format|
       if @comment.save
         new_comment = Comment.new
+        NotificationService.new(current_user, @commentable, 'new_comment').create_new_notification
         CommentMailer.with(user: @commentable.user, post: @commentable).new_comment.deliver_later
         format.turbo_stream do
           if @parent

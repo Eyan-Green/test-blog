@@ -28,8 +28,16 @@ RSpec.describe User, type: :model do
       t = User.reflect_on_association(:comments)
       expect(t.macro).to eq(:has_many)
     end
-    it 'should have many comments' do
+    it 'should have many likes' do
       t = User.reflect_on_association(:likes)
+      expect(t.macro).to eq(:has_many)
+    end
+    it 'should have many notifications' do
+      t = User.reflect_on_association(:notifications)
+      expect(t.macro).to eq(:has_many)
+    end
+    it 'should have many notifications' do
+      t = User.reflect_on_association(:sent_notifications)
       expect(t.macro).to eq(:has_many)
     end
     it 'should belong to user type' do
@@ -110,6 +118,18 @@ RSpec.describe User, type: :model do
           expect(user.full_name).to eq('Test User')
         end.not_to change(User, :count)
       end
+    end
+  end
+
+  describe 'Instance methods' do
+    it 'returns unread notifications' do
+      notification = create(:notification)
+      expect(notification.user.unread_notifications).to include(notification)
+    end
+
+    it 'does not return read notifications' do
+      notification = create(:notification, read: true)
+      expect(notification.user.unread_notifications).to_not include(notification)
     end
   end
 

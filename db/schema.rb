@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_03_170034) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_17_133153) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -73,6 +73,20 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_03_170034) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "notifications", force: :cascade do |t|
+    t.string "type_of_notification"
+    t.boolean "read", default: false
+    t.string "targetable_type", null: false
+    t.bigint "targetable_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "actor_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["actor_id"], name: "index_notifications_on_actor_id"
+    t.index ["targetable_type", "targetable_id"], name: "index_notifications_on_targetable"
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.bigint "user_id", null: false
@@ -104,6 +118,9 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_03_170034) do
     t.integer "user_type_id"
     t.string "uid"
     t.string "provider"
+    t.datetime "locked_at"
+    t.integer "failed_attempts", default: 0
+    t.string "unlock_token"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["user_type_id"], name: "index_users_on_user_type_id"
@@ -113,5 +130,6 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_03_170034) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "comments", "users"
   add_foreign_key "likes", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "posts", "users"
 end

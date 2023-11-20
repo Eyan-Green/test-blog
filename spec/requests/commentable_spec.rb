@@ -3,8 +3,9 @@
 require 'rails_helper'
 
 RSpec.describe 'Comments', type: :request do
-  let(:user) { create(:user, :writer) }
-  let(:commentable) { create(:post, :post_type) }
+  let(:user) { create(:user, :admin) }
+  let(:commentable) { create(:post, :post_type, user: create(:user, :writer)) }
+  let(:commentable_by_current_user) { create(:post, :post_type) }
   let(:comment_commentable) { create(:comment) }
 
   before do
@@ -25,6 +26,19 @@ RSpec.describe 'Comments', type: :request do
         expect do
           post "/posts/#{commentable.id}/comments", params: valid_params, headers: header_params
         end.to(have_enqueued_job.on_queue('default').with('CommentMailer', 'new_comment', 'deliver_now', { params: { user: commentable.user, post: commentable}, args: []}))
+      end
+      it 'create a notification in the DB' do
+        post "/posts/#{commentable.id}/comments", params: valid_params, headers: header_params
+        expect(Notification.all.count).to eq(1)
+        expect(Notification.last.user).to eq(commentable.user)
+        expect(Notification.last.actor).to eq(user)
+        expect(Notification.last.read).to be(false)
+        expect(Notification.last.type_of_notification).to eq('new_comment')
+      end
+
+      it 'does not create a notification when author comments on post' do
+        post "/posts/#{commentable_by_current_user.id}/comments", params: valid_params, headers: header_params
+        expect(Notification.all.count).to eq(0)
       end
     end
 

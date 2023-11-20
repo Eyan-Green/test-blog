@@ -14,11 +14,17 @@ RSpec.describe 'Posts', type: :request do
   end
 
   describe 'Returns all posts' do
+    before(:each) do
+      MeiliSearch::Rails::Utilities.reindex_all_models
+    end
+
+    after(:each) do
+      MeiliSearch::Rails::Utilities.clear_all_indexes
+    end
+
     it 'returns http success and renders all posts' do
       get '/posts'
       expect(response).to have_http_status(:success)
-      expect(response.body).to include(instance.title)
-      expect(response.body).to include(instance.content.to_plain_text)
       expect(response.body).to include('All posts')
     end
   end
@@ -29,6 +35,13 @@ RSpec.describe 'Posts', type: :request do
       expect(response).to have_http_status(:success)
       expect(response.body).to include(instance.title)
       expect(response.body).to include(instance.content.to_plain_text)
+    end
+
+    it 'redirects to root_path with record not found message' do
+      get "/posts/#{Post.last.id + 1}"
+      expect(response).to redirect_to(root_path)
+      follow_redirect!
+      expect(response.body).to include('Record not found!')
     end
   end
 

@@ -130,4 +130,17 @@ footer {
     border: 1px solid #747775;
     height: 40px;
   }
+
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 500ms;
+}
+.fade-enter-from, .fade-leave-to {
+    opacity: 0;
+}
+.fade-enter-to, .fade-leave-from {
+    opacity: 1;
+}
+.d-none {
+    display: none;
+}
   

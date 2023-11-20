@@ -5,7 +5,7 @@
     <div><%= comment.body %></div>
     <div class="flex flex-col md:flex-row items-center text-center space-y-2 md:space-y-0">
       <%= link_to 'Edit', edit_comment_path(comment), class: 'md:mr-2 hover:cursor-pointer actions rounded-md hover:bg-blue-300 login-button px-2 pt-2 min-w-[75px]' %>
-      <%= button_to "Delete", comment_path(comment), method: :delete, data: { confirm: "Are you sure?" }, class: 'hover:cursor-pointer actions rounded-md hover:bg-red-300 login-button px-2 min-w-[75px]' %>
+      <%= button_to "Delete", comment_path(comment), method: :delete, form: {data: {turbo_confirm: 'Are you sure?'}}, class: 'hover:cursor-pointer actions rounded-md hover:bg-red-300 login-button px-2 min-w-[75px]' %>
     </div>
   </div>
 <% end %>
