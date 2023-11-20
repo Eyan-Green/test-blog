@@ -18,6 +18,10 @@ RSpec.describe Post, type: :model do
       t = Post.reflect_on_association(:comments)
       expect(t.macro).to eq(:has_many)
     end
+    it 'should have many notifications' do
+      t = Post.reflect_on_association(:notifications)
+      expect(t.macro).to eq(:has_many)
+    end
   end
 
   describe 'Validations' do

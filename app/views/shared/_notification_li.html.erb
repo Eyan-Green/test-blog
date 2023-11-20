@@ -1,0 +1,9 @@
+<%= turbo_frame_tag notification do %>
+  <li class='<%= notification_read(notification) %>'>
+    <%= "#{notification.type_of_notification} submitted by #{notification.actor.full_name} on " %>
+    <%= link_to notification.targetable.title, notification.targetable, class: 'hover:underline' %>
+    <% if !notification.read? %>
+      <%= button_to "Mark as read", mark_as_read_notification_path(notification), method: :patch %>
+    <% end %>
+  </li>
+<% end %>

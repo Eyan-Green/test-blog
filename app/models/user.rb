@@ -11,8 +11,8 @@ class User < ApplicationRecord
          :lockable, :omniauthable, omniauth_providers: [:google_oauth2]
 
   has_many :comments
-  has_many :likes
-  has_many :notifications
+  has_many :likes, dependent: :destroy
+  has_many :notifications, dependent: :destroy
   has_many :posts
   has_many :sent_notifications, foreign_key: :actor_id, class_name: 'Notification'
   belongs_to :user_type, foreign_key: :user_type_id, required: false

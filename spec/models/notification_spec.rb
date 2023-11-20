@@ -10,5 +10,9 @@ RSpec.describe Notification, type: :model do
       t = Notification.reflect_on_association(:actor)
       expect(t.macro).to eq(:belongs_to)
     end
+    it 'belongs_to actor' do
+      t = Notification.reflect_on_association(:targetable)
+      expect(t.macro).to eq(:belongs_to)
+    end
   end
 end

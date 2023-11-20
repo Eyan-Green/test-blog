@@ -1,8 +1,11 @@
 <div class="flex flex-col items-center space-y-5 my-5">
   <h2>Notification Center</h2>
+  <% if current_user.notifications.count.positive? %>
+    <h3><%= button_to 'Delete All Notifications', destroy_all_notifications_path, method: :delete, form: {data: {turbo_confirm: 'Are you sure?'}} %>  </h3>
+  <% end %>
   <% current_user.notifications.each do |notification| %>
   <ul>
-    <li><%= "#{notification.type_of_notification} submitted by #{notification.actor.full_name}" %></li>
+    <%= render 'shared/notification_li', notification: notification %>
   </ul>
   <% end %>
 </div>

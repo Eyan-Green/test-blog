@@ -13,6 +13,14 @@ Rails.application.routes.draw do
   resources :comments do
     resources :comments, module: :comments
   end
+  resources :notifications do
+    member do
+      patch :mark_as_read
+    end
+    collection do
+      delete :destroy_all
+    end
+  end
   resources :posts do
     resources :comments, module: :posts
     resource :like, module: :posts

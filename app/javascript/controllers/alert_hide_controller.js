@@ -5,11 +5,20 @@ export default class extends Controller {
 
   hide(event) {
     event.preventDefault()
-    this.alertTarget.classList.add("hidden")   
+    this.alertTarget.classList.add("hidden")
   }
 
   toggle(event) {
-    event.preventDefault()
-    this.notificationsTarget.classList.toggle("hidden") 
+    event.preventDefault();
+    const notificationsElement = this.notificationsTarget;
+
+    // If the element is already visible, hide it
+    if (notificationsElement.classList.contains("h-0")) {
+      notificationsElement.classList.remove("h-0");
+      notificationsElement.classList.add("h-96");
+    } else {
+      notificationsElement.classList.remove("h-96");
+      notificationsElement.classList.add("h-0");
+    }
   }
 }
