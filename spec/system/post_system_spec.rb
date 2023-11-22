@@ -9,6 +9,11 @@ RSpec.describe 'Post system spec', type: :system do
   before(:each) do
     create(:post_type, :tech)
     login_as user_instance
+    MeiliSearch::Rails::Utilities.reindex_all_models
+  end
+
+  after(:each) do
+    MeiliSearch::Rails::Utilities.clear_all_indexes
   end
 
   it 'creates a new post' do

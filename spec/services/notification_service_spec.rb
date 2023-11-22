@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe NotificationService do
   let(:current_user) { create(:user, :admin) }
   let(:targetable) { create(:post, :post_type) }
-  let(:notification_type) { 'like' }
+  let(:notification_type) { 'new_comment_on_post' }
 
   describe '#create_new_notification' do
     context 'when current user is not the same as targetable user' do
