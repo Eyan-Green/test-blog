@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Comments', type: :request do
   let(:user) { create(:user, :admin) }
   let(:commentable) { create(:post, :post_type, user: create(:user, :writer)) }
-  let(:commentable_by_current_user) { create(:post, :post_type) }
+  let(:commentable_by_current_user) { create(:post, :post_type, user: user) }
   let(:comment_commentable) { create(:comment) }
 
   before do
@@ -33,7 +33,7 @@ RSpec.describe 'Comments', type: :request do
         expect(Notification.last.user).to eq(commentable.user)
         expect(Notification.last.actor).to eq(user)
         expect(Notification.last.read).to be(false)
-        expect(Notification.last.type_of_notification).to eq('new_comment')
+        expect(Notification.last.type_of_notification).to eq('new_comment_on_post')
       end
 
       it 'does not create a notification when author comments on post' do

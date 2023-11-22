@@ -4,6 +4,9 @@
 require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
+  let(:comment_instance) { create(:comment, parent_id: nil) }
+  let(:comment_two) { create(:comment, parent_id: comment_instance.id) }
+
   describe 'Associations' do
     it 'belongs to user' do
       t = Comment.reflect_on_association(:user)
@@ -20,6 +23,15 @@ RSpec.describe Comment, type: :model do
     it 'has many comments' do
       t = Comment.reflect_on_association(:comments)
       expect(t.macro).to eq(:has_many)
+    end
+  end
+
+  describe 'Instance methods' do
+    it 'returns post' do
+      expect(comment_instance.reply_to_comment_or_post).to eq('new_comment_on_post')
+    end
+    it 'returns comment' do
+      expect(comment_two.reply_to_comment_or_post).to eq('new_comment_on_comment')
     end
   end
 end

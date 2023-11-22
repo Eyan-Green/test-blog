@@ -9,6 +9,11 @@ RSpec.describe 'User system spec', type: :system do
   before(:each) do
     writer_instance
     login_as admin_instance
+    MeiliSearch::Rails::Utilities.reindex_all_models
+  end
+
+  after(:each) do
+    MeiliSearch::Rails::Utilities.clear_all_indexes
   end
 
   it 'visits users_path, locks writer and is redirected with a flash message' do

@@ -1,14 +1,15 @@
 <div 
 data-controller="alert-hide">
   <nav class="h-16 bg-blue-100 flex items-center justify-end space-x-5 px-5 sticky">
-    <%= render '/shared/notification_navbar' if user_signed_in? %>
+    <div id="notification_counter"><%= render '/shared/notification_navbar' if user_signed_in? %></div>
     <div class="hover:text-red-500"><%= link_to 'Posts', posts_path if user_signed_in? %></div>
     <div class="hover:text-red-500"><%= link_to 'New Post', new_post_path if user_signed_in? %></div>
     <div class="hover:text-red-500"><%= link_to 'Users', users_path if user_signed_in? && policy(:user).index? %></div>
     <div class="hover:text-red-500"><%= button_to('Sign Out', destroy_user_session_path, method: :delete) if user_signed_in? %></div>
   </nav>
   <div class="h-0 overflow-auto transition-height duration-1000 ease-in-out bg-gray-300 bg-opacity-70"
-       data-alert-hide-target="notifications">
+       data-alert-hide-target="notifications"
+       id="notifications_list">
     <% if user_signed_in? %>
       <%= render '/shared/notifications' %>
     <% end %>

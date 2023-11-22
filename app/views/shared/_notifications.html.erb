@@ -3,7 +3,7 @@
   <% if current_user.notifications.count.positive? %>
     <h3><%= button_to 'Delete All Notifications', destroy_all_notifications_path, method: :delete, form: {data: {turbo_confirm: 'Are you sure?'}} %>  </h3>
   <% end %>
-  <% current_user.notifications.each do |notification| %>
+  <% current_user.notifications.order({ created_at: :desc}).each do |notification| %>
   <ul>
     <%= render 'shared/notification_li', notification: notification %>
   </ul>

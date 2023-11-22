@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :notification do
-    type_of_notification { 'new_comment' }
+    type_of_notification { 'new_comment_on_post' }
     read { false }
     targetable_id { (Post.last || create(:post, :post_type)).id }
     targetable_type { 'Post' }

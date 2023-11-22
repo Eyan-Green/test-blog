@@ -24,4 +24,12 @@ class Comment < ApplicationRecord
     broadcast_remove_to self
     broadcast_action_to self, action: :remove, target: "#{dom_id(self)}_with_comments"
   end
+
+  def reply_to_comment_or_post
+    if parent_id
+      "new_comment_on_#{parent.class.name.downcase}"
+    else
+      "new_comment_on_#{commentable_type.downcase}"
+    end
+  end
 end
