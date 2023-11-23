@@ -7,6 +7,7 @@ class Posts::LikesController < ApplicationController
       @post.unlike(current_user)
     else
       @post.like(current_user)
+      NotificationService.new(current_user, @post, 'new_like_on_post').create_new_notification
     end
 
     respond_to do |format|

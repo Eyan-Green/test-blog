@@ -83,7 +83,9 @@ RSpec.describe 'Google SSO', type: :request do
       end
 
       it 'sends an email notification' do
-        expect { patch "/users/#{writer_instance.id}/toggle_lock" }.to change { ActionMailer::Base.deliveries.count }.by(1)
+        expect do
+          patch "/users/#{writer_instance.id}/toggle_lock"
+        end.to change { ActionMailer::Base.deliveries.count }.by(1)
       end
     end
 

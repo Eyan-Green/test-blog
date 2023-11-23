@@ -1,0 +1,5 @@
+<%= "#{notification.actor.full_name} likes your post called " %>
+<%= link_to notification.targetable.title, notification.targetable, target: "_blank", class: 'hover:underline' %>
+<% if !notification.read? %>
+  <%= button_to "Mark as read", mark_as_read_notification_path(notification), method: :patch, class: 'hover:underline' %>
+<% end %>

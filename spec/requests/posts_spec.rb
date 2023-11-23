@@ -91,10 +91,11 @@ RSpec.describe 'Posts', type: :request do
 
   describe 'DELETE /destroy' do
     it 'returns http success' do
-      delete "/posts/#{Post.last.id}"
+      delete "/posts/#{instance.id}"
       follow_redirect!
       expect(response.body).to include('All posts')
       expect(response.body).to include('Post was successfully deleted.')
+      expect { instance.reload }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 end

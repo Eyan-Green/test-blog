@@ -12,6 +12,22 @@ RSpec.describe NotificationsController, type: :request do
     login_as User.first
   end
 
+  describe 'GET #index format JSON' do
+    it 'returns only unread notifications in JSON format' do
+      create_list(:notification, 3, user: user_instance, read: false)
+      create_list(:notification, 2, user: user_instance, read: true)
+
+      get '/notifications', params: { format: :json }
+
+      expect(response).to have_http_status(:success)
+      notifications = JSON.parse(response.body)
+      expect(notifications.count).to eq(3)
+      notifications.each do |notification|
+        expect(notification['read']).to be_falsey
+      end
+    end
+  end
+
   describe 'PATCH #mark_as_read' do
     let!(:notification) { create(:notification, user: user_instance) }
 

@@ -16,7 +16,7 @@ class Notification < ApplicationRecord
 
   def broadcast_notification
     broadcast_replace_to [:notifications],
-                         target: 'notifications_list',
+                         target: "notifications_list_#{user.id}",
                          partial: 'shared/notifications',
                          locals: { current_user: user }
   end

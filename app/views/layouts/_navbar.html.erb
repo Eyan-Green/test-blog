@@ -11,7 +11,7 @@ data-controller="alert-hide">
   <div class="h-0 overflow-auto transition-height duration-1000 ease-in-out bg-gray-300 bg-opacity-70"
        data-alert-hide-target="notifications">
     <% if user_signed_in? %>
-      <div id="notifications_list">
+      <div id="<%= "notifications_list_#{current_user.id}" %>">
         <%= render '/shared/notifications' %>
       </div>
     <% end %>

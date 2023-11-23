@@ -4,8 +4,11 @@ export default class extends Controller {
   static targets = [ "alert", "notifications", "counter", "bell", "list" ]
 
   hide(event) {
-    event.preventDefault()
-    this.alertTarget.classList.add("hidden")
+    event.preventDefault();
+    this.alertTarget.classList.add("opacity-0");
+    setTimeout(() => {
+      this.alertTarget.classList.add("hidden");
+    }, 500);
   }
 
   toggle(event) {

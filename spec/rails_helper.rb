@@ -1,5 +1,6 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
+require 'support/trix_helpers'
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
@@ -39,6 +40,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
   config.include FactoryBot::Syntax::Methods
   config.include Warden::Test::Helpers
+  config.include TrixHelpers, type: :feature
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
 
