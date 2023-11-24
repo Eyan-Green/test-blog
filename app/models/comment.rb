@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# PostType class inherits from Type
+# app/models/comment.rb
 class Comment < ApplicationRecord
   include ActionView::RecordIdentifier
 

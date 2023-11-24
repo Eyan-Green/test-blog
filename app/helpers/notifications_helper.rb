@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Notifications helper
+# app/helpers/notifications_helper.rb
 module NotificationsHelper
   def notification_colour(current_user)
     current_user.unread_notifications.count.positive? ? 'fill-current text-red-500' : ''

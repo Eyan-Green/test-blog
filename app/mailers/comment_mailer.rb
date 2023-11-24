@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# app/mailers/comment_mailer.rb
 class CommentMailer < ApplicationMailer
   def new_comment
     @user = params[:user]

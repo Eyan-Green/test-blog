@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# app/controller/users_controller.rb
 class UsersController < ApplicationController
   before_action :set_user, only: %i[toggle_lock]
 

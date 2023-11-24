@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# User model
+# app/models/user.rb
 class User < ApplicationRecord
   include MeiliSearch::Rails
   extend Pagy::Meilisearch

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Posts controller
+# app/controller/posts_controller.rb
 class PostsController < ApplicationController
   before_action :set_post, only: %i[show edit update destroy]
 

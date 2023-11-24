@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Comment concern controller
+# app/controller/concerns/commentable.rb
 module Commentable
   extend ActiveSupport::Concern
   include ActionView::RecordIdentifier

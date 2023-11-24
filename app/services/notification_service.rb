@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# app/services/notification_service.rb
 class NotificationService
   attr_reader :current_user, :targetable, :notification_type
 

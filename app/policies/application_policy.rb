@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Pundit application policy
+# app/policies/application_policy.rb
 class ApplicationPolicy
   attr_reader :user, :record
 

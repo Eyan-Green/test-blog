@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Inherits from Type
+# app/models/user_type.rb
 class UserType < Type
   has_many :users
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Post model
+# app/models/post.rb
 class Post < ApplicationRecord
   include MeiliSearch::Rails
   extend Pagy::Meilisearch

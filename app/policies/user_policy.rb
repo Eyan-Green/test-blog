@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Pundit policy for Comment class
+# app/policies/user_policy.rb
 class UserPolicy < ApplicationPolicy
   def index?
     user_is_admin?

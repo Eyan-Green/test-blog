@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-# Comments controller, create action is in concerns
+# app/controller/comments_controller.rb
+# create action is in concerns folder
 class CommentsController < ApplicationController
   before_action :set_comment
 

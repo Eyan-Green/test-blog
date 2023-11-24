@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# app/controller/notifications_controller.rb
 class NotificationsController < ApplicationController
   before_action :set_notification, only: [:mark_as_read]
 
