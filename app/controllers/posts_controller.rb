@@ -6,6 +6,9 @@ class PostsController < ApplicationController
 
   def index
     posts = Post.pagy_search(params[:query])
+    @post1 = Post.all.sample
+    @post2 = Post.all.sample
+    @post3 = Post.all.sample
     @pagy, @posts = pagy_meilisearch(posts, limit: 25)
   rescue Pagy::OverflowError
     redirect_to posts_path(page: 1)

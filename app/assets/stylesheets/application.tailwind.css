@@ -39,3 +39,29 @@ h2 {
 .page.active {
   @apply z-10 border-indigo-500 bg-indigo-50 text-indigo-600 relative inline-flex items-center border px-4 py-2 text-sm font-medium focus:z-20;
 }
+
+@keyframes slideInRight {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutLeft {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.slide-in-right {
+  animation: slideInRight 1.0s forwards;
+}
+
+.slide-out-left {
+  animation: slideOutLeft 1.0s forwards;
+}
