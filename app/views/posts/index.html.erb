@@ -1,26 +1,5 @@
 <% unless @post1.nil? && @post2.nil? && @post3.nil? %>
-  <div data-controller="infinite-carousel" class="w-full">
-    <div class="relative h-64 overflow-hidden">
-      <div class="absolute inset-0 flex items-center justify-center transition-transform duration-1000 ease-in-out transform" data-infinite-carousel-target="slide">
-        <div class="w-full bg-blue-300 h-full flex flex-col items-center justify-center">
-          <h3 class="text-white text-2xl md:text-3xl font-bold"><%= @post1.title.nil? %></h3>
-          <h4 class="text-white text-xl md:text-2xl font-bold"><%= link_to 'Read more', post_path(@post1) %></h4>
-        </div>
-      </div>
-      <div class="absolute hidden inset-0 flex items-center justify-center transition-transform duration-1000 ease-in-out transform" data-infinite-carousel-target="slide">
-        <div class="w-full bg-red-300 h-full flex flex-col items-center justify-center">
-          <h3 class="text-white text-2xl md:text-3xl font-bold"><%= @post2.title %></h3>
-          <h4 class="text-white text-xl md:text-2xl font-bold"><%= link_to 'Read more', post_path(@post2) %></h4>
-        </div>
-      </div>
-      <div class="absolute hidden inset-0 flex items-center justify-center transition-transform duration-1000 ease-in-out transform" data-infinite-carousel-target="slide">
-        <div class="w-full bg-green-300 h-full flex flex-col items-center justify-center">
-          <h3 class="text-white text-2xl md:text-3xl font-bold"><%= @post3.title %></h3>
-          <h4 class="text-white text-xl md:text-2xl font-bold"><%= link_to 'Read more', post_path(@post3) %></h4>
-        </div>
-      </div>
-    </div>
-  </div>
+  <%= render 'hero', post1: @post1, post2: @post2, post3: @post3 %>
 <% end %>
 
 <div class="h-full">
