@@ -1,5 +1,5 @@
 <div 
-data-controller="alert-hide">
+data-controller="notifications">
   <nav class="h-16 bg-blue-100 flex items-center justify-between md:justify-end space-x-5 px-5 sticky">
     <div id="notification_counter"><%= render '/shared/notification_navbar' if user_signed_in? %></div>
     <div class="hover:text-red-500"><%= link_to 'Posts', posts_path if user_signed_in? %></div>
@@ -9,7 +9,7 @@ data-controller="alert-hide">
   </nav>
   <%= turbo_stream_from :notifications %>
   <div class="h-0 overflow-auto transition-height duration-1000 ease-in-out bg-gray-300 bg-opacity-70"
-       data-alert-hide-target="notifications">
+       data-notifications-target="notifications">
     <% if user_signed_in? %>
       <div id="<%= "notifications_list_#{current_user.id}" %>">
         <%= render '/shared/notifications' %>
