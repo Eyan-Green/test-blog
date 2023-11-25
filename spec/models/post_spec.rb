@@ -46,6 +46,17 @@ RSpec.describe Post, type: :model do
     end
   end
 
+  describe 'default_scope' do
+    it 'orders posts by created_at in descending order' do
+      post1 = create(:post, :post_type, created_at: 1.day.ago)
+      post2 = create(:post, :post_type, created_at: Time.current)
+
+      posts = Post.all
+
+      expect(posts).to eq([post2, post1])
+    end
+  end
+
   describe 'Utility methods' do
     let(:instance) { create(:post, :post_type) }
     let(:like_instance) { create(:like) }

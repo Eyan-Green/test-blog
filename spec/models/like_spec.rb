@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Like, type: :model do
-  include ActionView::RecordIdentifier
+  let(:like_instance) { create(:like) }
   describe 'Associations' do
     it 'belongs to record' do
       t = Like.reflect_on_association(:record)
@@ -10,6 +10,14 @@ RSpec.describe Like, type: :model do
     it 'belongs to record' do
       t = Like.reflect_on_association(:user)
       expect(t.macro).to eq(:belongs_to)
+    end
+    it 'associates with different record types' do
+      post = create(:post, :post_type)
+
+      like_on_post = Like.create(record: post, user: create(:user))
+
+      expect(like_on_post.record_type).to eq('Post')
+      expect(like_on_post.record).to eq(post)
     end
   end
 end

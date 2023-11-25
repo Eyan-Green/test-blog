@@ -5,7 +5,7 @@ require 'rails_helper'
 
 RSpec.describe Comment, type: :model do
   let(:comment_instance) { create(:comment, parent_id: nil) }
-  let(:comment_two) { create(:comment, parent_id: comment_instance.id) }
+  let(:comment2) { create(:comment, parent_id: comment_instance.id) }
 
   describe 'Associations' do
     it 'belongs to user' do
@@ -26,12 +26,20 @@ RSpec.describe Comment, type: :model do
     end
   end
 
+  describe 'Validations' do
+    it 'is invalid without body' do
+      comment = Comment.new(body: nil)
+      comment.valid?
+      expect(comment.errors.full_messages).to include("Body can't be blank")
+    end
+  end
+
   describe 'Instance methods' do
     it 'returns post' do
       expect(comment_instance.reply_to_comment_or_post).to eq('new_comment_on_post')
     end
     it 'returns comment' do
-      expect(comment_two.reply_to_comment_or_post).to eq('new_comment_on_comment')
+      expect(comment2.reply_to_comment_or_post).to eq('new_comment_on_comment')
     end
   end
 end
