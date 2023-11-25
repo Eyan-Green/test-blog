@@ -22,6 +22,34 @@ RSpec.describe Post, type: :model do
       t = Post.reflect_on_association(:notifications)
       expect(t.macro).to eq(:has_many)
     end
+    it 'should have many likes' do
+      t = Post.reflect_on_association(:likes)
+      expect(t.macro).to eq(:has_many)
+    end
+    it 'has polymorphic relationship notifications' do
+      post = create(:post, :post_type)
+
+      notification_on_post = Notification.create(targetable: post, user: create(:user))
+
+      expect(notification_on_post.targetable_type).to eq('Post')
+      expect(notification_on_post.targetable).to eq(post)
+    end
+    it 'has polymorphic relationship likes' do
+      post = create(:post, :post_type)
+
+      like_on_post = Like.create(record: post, user: create(:user))
+
+      expect(like_on_post.record_type).to eq('Post')
+      expect(like_on_post.record).to eq(post)
+    end
+    it 'has polymorphic relationship comments' do
+      post = create(:post, :post_type)
+
+      comment_on_post = Comment.create(commentable: post, user: create(:user), body: 'Text')
+
+      expect(comment_on_post.commentable_type).to eq('Post')
+      expect(comment_on_post.commentable).to eq(post)
+    end
   end
 
   describe 'Validations' do

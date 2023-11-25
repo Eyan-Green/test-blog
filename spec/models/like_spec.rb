@@ -11,7 +11,7 @@ RSpec.describe Like, type: :model do
       t = Like.reflect_on_association(:user)
       expect(t.macro).to eq(:belongs_to)
     end
-    it 'associates with different record types' do
+    it 'has polymorphic relationship' do
       post = create(:post, :post_type)
 
       like_on_post = Like.create(record: post, user: create(:user))
