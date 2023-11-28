@@ -1,6 +1,14 @@
 <div 
 data-controller="notifications">
-  <nav class="h-16 bg-blue-100 flex items-center justify-between md:justify-end space-x-5 px-5 sticky">
+	<nav class="lg:hidden flex items-center h-16 bg-blue-100">
+		<button class="text-blue-600 p-3" data-action="click->notifications#hamburger">
+			<svg class="block h-4 w-4 fill-current" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+				<path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
+			</svg>
+		</button>
+	</nav>
+  <nav class="lg:h-16 bg-blue-100 hidden py-5 lg:py-0 flex flex-col lg:flex lg:flex-row lg:items-center md:justify-end lg:space-x-5 px-3 lg:px-5 sticky"
+       data-notifications-target="expand">
     <div id="notification_counter"><%= render '/shared/notification_navbar' if user_signed_in? %></div>
     <div class="hover:text-red-500"><%= link_to 'Posts', posts_path if user_signed_in? %></div>
     <div class="hover:text-red-500"><%= link_to 'New Post', new_post_path if user_signed_in? %></div>

@@ -24,6 +24,10 @@ RSpec.describe Comment, type: :model do
       t = Comment.reflect_on_association(:comments)
       expect(t.macro).to eq(:has_many)
     end
+    it 'has a rich text attribute for body' do
+      expect(comment_instance).to respond_to(:body)
+      expect(comment_instance.body).to be_a(ActionText::RichText)
+    end
   end
 
   describe 'Validations' do
@@ -40,6 +44,28 @@ RSpec.describe Comment, type: :model do
     end
     it 'returns comment' do
       expect(comment2.reply_to_comment_or_post).to eq('new_comment_on_comment')
+    end
+  end
+
+  describe 'Callbacks' do
+    it 'updating a comment triggers after_update_commit' do
+      comment_instance
+      expect do
+        comment_instance.update(body: 'Updated comment')
+      end.to have_broadcasted_to(comment_instance.to_gid_param).from_channel(Turbo::StreamsChannel)
+    end
+
+    it 'updating a comment triggers after_update_commit' do
+      comment = build(:comment, parent: nil)
+      expect do
+        comment.save
+      end.to have_broadcasted_to("#{comment.commentable.to_gid_param}:comments").from_channel(Turbo::StreamsChannel)
+    end
+
+    it 'destroying a comment triggers after_destroy_commit with broadcast_remove_to & broadcast_action_to' do
+      expect do
+        comment_instance.destroy
+      end.to have_broadcasted_to(comment_instance.to_gid_param).from_channel(Turbo::StreamsChannel).at_least(2).times
     end
   end
 end

@@ -50,6 +50,11 @@ RSpec.describe Post, type: :model do
       expect(comment_on_post.commentable_type).to eq('Post')
       expect(comment_on_post.commentable).to eq(post)
     end
+    it 'has a rich text attribute for content' do
+      post = create(:post, :post_type)
+      expect(post).to respond_to(:content)
+      expect(post.content).to be_a(ActionText::RichText)
+    end
   end
 
   describe 'Validations' do

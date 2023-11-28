@@ -15,4 +15,13 @@ RSpec.describe Notification, type: :model do
       expect(t.macro).to eq(:belongs_to)
     end
   end
+
+  describe 'Callbacks' do
+    it 'creating a notification triggers after_create_commit' do
+      notification = build(:notification)
+      expect do
+        notification.save
+      end.to have_broadcasted_to(:notifications).from_channel(Turbo::StreamsChannel)
+    end
+  end
 end

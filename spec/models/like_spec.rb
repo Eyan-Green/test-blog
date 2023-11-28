@@ -20,4 +20,18 @@ RSpec.describe Like, type: :model do
       expect(like_on_post.record).to eq(post)
     end
   end
+  describe 'Callbacks' do
+    it 'creating a like triggers after_create_commit' do
+      like = Like.new(user: create(:user, :writer), record: create(:post, :post_type))
+      expect do
+        like.save
+      end.to have_broadcasted_to("#{like.record.to_gid_param}:likes").from_channel(Turbo::StreamsChannel)
+    end
+
+    it 'destroying a like triggers after_destroy_commit' do
+      expect do
+        like_instance.destroy
+      end.to have_broadcasted_to("#{like_instance.record.to_gid_param}:likes").from_channel(Turbo::StreamsChannel)
+    end
+  end
 end

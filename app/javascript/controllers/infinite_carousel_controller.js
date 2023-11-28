@@ -32,6 +32,6 @@ export default class extends Controller {
       nextSlide.classList.remove('slide-in-right');
 
       this.currentIndex = this.nextIndex;
-    }, 1000);
+    }, 5000);
   }
 }
