@@ -7,7 +7,7 @@ data-controller="notifications">
 			</svg>
 		</button>
 	</nav>
-  <nav class="lg:h-16 bg-blue-100 hidden py-5 lg:py-0 flex flex-col lg:flex lg:flex-row lg:items-center md:justify-end lg:space-x-5 px-3 lg:px-5 sticky"
+  <nav class="lg:h-16 bg-blue-100 hidden py-5 lg:py-0 flex flex-col lg:flex lg:flex-row lg:items-center md:justify-end lg:space-x-5 px-3 lg:px-5"
        data-notifications-target="expand">
     <div id="notification_counter"><%= render '/shared/notification_navbar' if user_signed_in? %></div>
     <div class="hover:text-red-500"><%= link_to 'Posts', posts_path if user_signed_in? %></div>
