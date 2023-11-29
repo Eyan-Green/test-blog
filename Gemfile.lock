@@ -110,14 +110,14 @@ GEM
     drb (2.2.0)
       ruby2_keywords
     erubi (1.12.0)
-    factory_bot (6.2.1)
+    factory_bot (6.4.2)
       activesupport (>= 5.0.0)
-    factory_bot_rails (6.2.0)
-      factory_bot (~> 6.2.0)
+    factory_bot_rails (6.4.2)
+      factory_bot (~> 6.4)
       railties (>= 5.0.0)
     faker (3.2.2)
       i18n (>= 1.8.11, < 2)
-    faraday (2.7.11)
+    faraday (2.7.12)
       base64
       faraday-net_http (>= 2.0, < 3.1)
       ruby2_keywords (>= 0.0.4)
@@ -171,7 +171,7 @@ GEM
     msgpack (1.7.2)
     multi_xml (0.6.0)
     mutex_m (0.2.0)
-    net-imap (0.4.5)
+    net-imap (0.4.7)
       date
       net-protocol
     net-pop (0.1.2)
@@ -180,7 +180,7 @@ GEM
       timeout
     net-smtp (0.4.0)
       net-protocol
-    nio4r (2.6.0)
+    nio4r (2.6.1)
     nokogiri (1.15.5-x86_64-linux)
       racc (~> 1.4)
     oauth2 (2.0.9)
@@ -347,7 +347,7 @@ DEPENDENCIES
   capybara
   debug
   devise
-  factory_bot_rails (= 6.2)
+  factory_bot_rails
   faker
   hiredis
   hotwire-rails
