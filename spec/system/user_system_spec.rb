@@ -44,6 +44,7 @@ RSpec.describe 'User system spec', type: :system do
     writer_name = User.where(user_type: UserType.find_by(name: 'Writer')).last.full_name
     users = User.where.not(full_name: writer_name)
     visit users_path
+    expect(page).to have_field('query')
     fill_in 'query', with: writer_name
     click_button 'Search'
     expect(page).to have_content(writer_name)
@@ -57,6 +58,7 @@ RSpec.describe 'User system spec', type: :system do
     writer_email = User.where(user_type: UserType.find_by(name: 'Writer')).last.email
     users = User.where.not(email: writer_email)
     visit users_path
+    expect(page).to have_field('query')
     fill_in 'query', with: writer_email
     click_button 'Search'
     expect(page).to have_content(writer_email)

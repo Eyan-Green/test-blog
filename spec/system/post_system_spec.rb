@@ -87,6 +87,7 @@ RSpec.describe 'Post system spec', type: :system do
     post_instance
     create(:post, :post_type, title: 'Something different')
     visit posts_path
+    expect(page).to have_field('query')
     fill_in 'query', with: 'Something different'
     click_button 'Search'
     expect(page).to have_content('Something different')
@@ -98,6 +99,7 @@ RSpec.describe 'Post system spec', type: :system do
     user = create(:user, :writer)
     create(:post, :post_type, title: 'Something different', user: user)
     visit posts_path
+    expect(page).to have_field('query')
     fill_in 'query', with: user.full_name
     click_button 'Search'
     expect(page).to have_content('Something different')
@@ -109,6 +111,7 @@ RSpec.describe 'Post system spec', type: :system do
     post_type = create(:post_type, name: 'Health')
     create(:post, title: 'Something different', post_type: post_type)
     visit posts_path
+    expect(page).to have_field('query')
     fill_in 'query', with: post_type.name
     click_button 'Search'
     expect(page).to have_content('Something different')
@@ -120,6 +123,7 @@ RSpec.describe 'Post system spec', type: :system do
     create(:comment)
     create(:post, :post_type, title: 'Something different')
     visit posts_path
+    expect(page).to have_field('query')
     fill_in 'query', with: 'This is a comment'
     click_button 'Search'
     expect(page).to have_content('Something different')
@@ -131,6 +135,7 @@ RSpec.describe 'Post system spec', type: :system do
     create(:comment)
     create(:post, :post_type, content: 'Some text', title: 'Different')
     visit posts_path
+    expect(page).to have_field('query')
     fill_in 'query', with: 'Some text'
     click_button 'Search'
     expect(page).to have_content('Some text')
