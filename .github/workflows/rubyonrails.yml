@@ -29,7 +29,7 @@ jobs:
       meilisearch:
         image: getmeili/meilisearch:latest
         ports:
-          - "7701:7700" # Change external port to 7701, internal remains 7700
+          - "7702:7700" # Change external port to 7702, internal remains 7700
         env:
           MEILISEARCH_HTTP_ADDR: "http://localhost:7700" # Still reference internal port
     env:
@@ -47,7 +47,7 @@ jobs:
         run: bin/rails db:schema:load
       - name: Start MeiliSearch
         run: |
-          docker run -d -p 7701:7700 getmeili/meilisearch:latest # Use port 7701 externally
+          docker run -d -p 7702:7700 getmeili/meilisearch:latest
           sleep 5 # Adjust as needed for MeiliSearch to start up
       - name: Run tests with MeiliSearch
         run: |
