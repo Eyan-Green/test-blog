@@ -17,8 +17,28 @@ export default class extends Controller {
     }
   }
 
+  toggleOpacity() {
+    const expandElement = this.expandTarget;
+
+    // Check if the element is hidden
+    if (expandElement.classList.contains("opacity-0")) {
+      // If hidden, gradually increase opacity and height after a short delay
+      setTimeout(() => {
+        expandElement.classList.remove("opacity-0");
+        expandElement.classList.add("opacity-100");    
+      }, 50);
+    } else {
+      // If visible, decrease opacity and height before hiding after a short delay
+      setTimeout(() => {
+        expandElement.classList.remove("opacity-100");
+        expandElement.classList.add("opacity-0");      
+      }, 50);
+    }
+  }
+
   hamburger(event) {
     event.preventDefault();
+    this.toggleOpacity();
     this.expandTarget.classList.toggle("hidden")
   }
 
