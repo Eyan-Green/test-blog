@@ -46,7 +46,7 @@ jobs:
         run: |
           bin/rails test:prepare
           bin/rails db:test:prepare
-          bin/rails rspec
+          bin/rails test
 
   lint:
     runs-on: ubuntu-latest
