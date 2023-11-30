@@ -29,9 +29,9 @@ jobs:
       meilisearch:
         image: getmeili/meilisearch:latest
         ports:
-          - "7700:7700"
+          - "7701:7700" # Change external port to 7701, internal remains 7700
         env:
-          MEILISEARCH_HTTP_ADDR: "http://localhost:7700"
+          MEILISEARCH_HTTP_ADDR: "http://localhost:7700" # Still reference internal port
     env:
       RAILS_ENV: test
       DATABASE_URL: "postgres://rails:password@localhost:5432/rails_test"
@@ -47,8 +47,8 @@ jobs:
         run: bin/rails db:schema:load
       - name: Start MeiliSearch
         run: |
-          docker run -d -p 7700:7700 getmeili/meilisearch:latest
-          sleep 5 # Wait for MeiliSearch to start up (adjust as needed)
+          docker run -d -p 7701:7700 getmeili/meilisearch:latest # Use port 7701 externally
+          sleep 5 # Adjust as needed for MeiliSearch to start up
       - name: Run tests with MeiliSearch
         run: |
           bin/rails test:prepare
@@ -69,4 +69,5 @@ jobs:
         run: bin/brakeman -q -w2
       - name: Lint Ruby files
         run: bin/rubocop --parallel
+
 
