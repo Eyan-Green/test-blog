@@ -25,8 +25,6 @@ RSpec.describe 'Notification system spec', type: :system do
     expect(page).to have_button('Delete All Notifications')
     click_button 'Delete All Notification'
     accept_alert 'Are you sure?'
-    expect(page).to have_text 'Notifications deleted!'
-    find('#notification_counter').click_button
     expect(page).to have_text 'You currently have no notifications.'
   end
 end

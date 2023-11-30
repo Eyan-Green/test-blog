@@ -1,7 +1,8 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = [ "notifications", "counter", "bell", "list", "expand" ]
+  static targets = [ "notifications", "counter", "bell",
+                     "list", "expand" , "hamburger", "cross" ]
 
   toggle(event) {
     event.preventDefault();
@@ -40,6 +41,12 @@ export default class extends Controller {
     event.preventDefault();
     this.toggleOpacity();
     this.expandTarget.classList.toggle("hidden")
+    if (this.hamburgerTarget.classList.contains("hidden")) {
+      this.hamburgerTarget.classList.remove("hidden");
+    } else {
+      this.hamburgerTarget.classList.add("hidden");
+    }    
+    this.crossTarget.classList.toggle("hidden");
   }
 
   counterTargetConnected() {

@@ -47,9 +47,7 @@ RSpec.describe NotificationsController, type: :request do
         delete destroy_all_notifications_path
       end.to change(Notification.where(user: user_instance), :count).from(3).to(0)
 
-      expect(response).to redirect_to(root_path)
-      follow_redirect!
-      expect(response.body).to include('Notifications deleted!')
+      expect(response).to have_http_status(:success)
     end
   end
 end

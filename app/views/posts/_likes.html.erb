@@ -2,5 +2,5 @@
   <%= tag.div id: "#{dom_id(post, :likes)}_count" do %>
     <%= render partial: 'posts/likes_count', locals: { post: post } %>
   <% end %>
-  <%= button_to like_button_text(post), post_like_path(post), method: :patch, class: 'bg-blue-300 p-2 rounded-md hover:bg-blue-400 min-w-[75px]' %>
+  <%= button_to like_button_text(post), post_like_path(post), method: :patch, class: "#{blue_or_red(post)} p-2 rounded-md min-w-[75px]" %>
 <% end %>

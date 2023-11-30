@@ -24,7 +24,12 @@ class NotificationsController < ApplicationController
   def destroy_all
     @notifications = Notification.where(user: current_user)
     @notifications.destroy_all
-    redirect_to root_path, notice: 'Notifications deleted!'
+    render turbo_stream: [turbo_stream.replace("notifications_#{current_user.id}",
+                                               partial: 'shared/notifications',
+                                               locals: { current_user: current_user }),
+                          turbo_stream.update('notification_counter',
+                                              partial: 'shared/notification_navbar',
+                                              locals: { current_user: current_user })]
   end
 
   private
