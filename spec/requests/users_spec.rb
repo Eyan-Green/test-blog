@@ -42,14 +42,10 @@ RSpec.describe 'Google SSO', type: :request do
     context 'Authorised user' do
       it 'visits index page and has a h1 with All users text' do
         login_as admin_instance
-        MeiliSearch::Rails::Utilities.reindex_all_models
         get '/users'
         expect(response.body).to include('All users')
         expect(response.body).to include('Use the search box to find a user.')
-        #expect(response.body).to include(admin_instance.full_name)
-        #expect(response.body).to include(admin_instance.email)
-        #expect(response.body).to include(admin_instance.created_at.to_s)
-        MeiliSearch::Rails::Utilities.clear_all_indexes
+        expect(response).to be_successful
       end
     end
 
