@@ -1,24 +1,13 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+* Ruby version: 3.2.2
 
-Things you may want to cover:
+* Make sure you run ./meilisearch. You may want to delete the indexes and reindex Post & User
 
-* Ruby version
+* Postgres DB
 
-* System dependencies
+* Database initialization: rails db:create
 
-* Configuration
+* How to run the test suite: rspec
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Services: There is a deliver later method on the comment mailer. I'm using Sidekiq to handle the queue
