@@ -48,4 +48,4 @@ jobs:
         run: |
           bin/rails test:prepare
           bin/rails db:test:prepare
-          rspec --exclude-pattern "spec/system/*_spec.rb"
+          bundle exec rspec --exclude-pattern "spec/system/*_spec.rb"
