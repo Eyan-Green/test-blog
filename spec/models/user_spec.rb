@@ -131,6 +131,26 @@ RSpec.describe User, type: :model do
       notification = create(:notification, read: true)
       expect(notification.user.unread_notifications).to_not include(notification)
     end
+
+    it 'returns true when user is administrator' do
+      user = create(:user, :admin)
+      expect(user.administrator?).to be true
+    end
+
+    it 'returns false when user is not administrator' do
+      user = create(:user, :writer)
+      expect(user.administrator?).to be false
+    end
+
+    it 'returns false when user is administrator' do
+      user = create(:user, :admin)
+      expect(user.writer?).to be false
+    end
+
+    it 'returns true when user is writer' do
+      user = create(:user, :writer)
+      expect(user.writer?).to be true
+    end
   end
 
   describe 'Callbacks' do

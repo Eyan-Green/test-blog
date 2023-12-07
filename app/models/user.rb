@@ -42,6 +42,12 @@ class User < ApplicationRecord
     notifications.where(read: false)
   end
 
+  %w[administrator writer].each do |type|
+    define_method("#{type}?") do
+      user_type.name == type.capitalize
+    end
+  end
+
   private
 
   def set_user_type

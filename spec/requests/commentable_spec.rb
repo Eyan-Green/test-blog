@@ -28,13 +28,12 @@ RSpec.describe 'Comments', type: :request do
           post "/posts/#{commentable.id}/comments", params: valid_params, headers: header_params
         end.to(have_enqueued_job.on_queue('default').with('CommentMailer', 'new_comment', 'deliver_now', { params: { user: commentable.user, post: commentable}, args: []}))
       end
-      it 'create a notification in the DB' do
+      it 'Calls create#_notification_job with user, commentable and comment' do
+        allow(CreateNotificationJob).to receive(:perform_later)
+        
         post "/posts/#{commentable.id}/comments", params: valid_params, headers: header_params
-        expect(Notification.all.count).to eq(1)
-        expect(Notification.last.user).to eq(commentable.user)
-        expect(Notification.last.actor).to eq(user)
-        expect(Notification.last.read).to be(false)
-        expect(Notification.last.type_of_notification).to eq('new_comment_on_post')
+        
+        expect(CreateNotificationJob).to have_received(:perform_later).with(user.id, commentable, Comment.last)
       end
 
       it 'does not create a notification when author comments on post' do

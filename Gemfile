@@ -87,3 +87,5 @@ gem 'pagy', '~> 6.1'
 gem 'sidekiq', '~> 7.2'
 
 gem 'meilisearch-rails', '~> 0.10.1'
+
+gem 'rack'
