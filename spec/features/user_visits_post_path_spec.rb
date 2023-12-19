@@ -43,7 +43,7 @@ feature 'User visits post path' do
     expect(page).to have_content('Post content!')
   end
 
-  scenario 'Valid create' do
+  scenario 'Invalid create' do
     visit new_post_path
 
     expect(page).to have_field 'post_title'
